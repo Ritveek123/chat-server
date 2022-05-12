@@ -1,0 +1,16 @@
+import socket
+sock = socket.socket()
+nam = socket.gethostname()
+name = socket.gethostbyname(nam)
+print("your id is: " + name)
+nameh = input("what should others call you: ")
+sock.bind((name, 8000))
+sock.listen(1)
+conn, add = sock.accept()
+otn = conn.recv(1024).decode()
+print("you have established connection from "+ otn)
+while True:
+    mess = input("you: ")
+    conn.send((nameh + ": " + mess).encode())
+    om = conn.recv(1024).decode()
+    print(om)
